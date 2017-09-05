@@ -61,6 +61,7 @@
 \newcommand{\cU}{\mathcal{U}}
 \newcommand{\tcT}{\tilde{\mathcal{T}}}
 \renewcommand{\so}{\mathscr{O}}
+\newcommand{\w}{\omega}
 %Scripty Things
 \renewcommand{\l}{\mathbf{\ell}}
 \renewcommand{\r}{{\upsilon}}%%the inclusion of \IC into \cC
@@ -182,9 +183,9 @@ This paper is organized as follows.
 
 \section{Graph Symmetries and Equitable Decompositions}\label{sec:EP}
 
-The main objects considered in this paper are graphs. A \emph{graph} $G$ is made up of a finite set of vertices $V(G)=\{1,\dots,n\}$ and and a finite set of edges $E(G)$. The vertices of a graph are typically represented by points in the plane and an edge by a line or curve in the plane that connects two vertices. A graph can be \emph{undirected}, meaning that each edge $\{i,j\}\in E$ can be thought of as an unordered set or a multiset if $i=j$ ($\{i,i\}\in E$). A graph is \emph{directed} when each edge is {\emph{directed}, in which case $(i,j)$ is an ordered tuple. In both a directed and undirected graph, a} \emph{loop} is an edge with only one vertex ($\{i, i\}\in E$). A \emph{weighted graph} is a graph, either directed or undirected, in which each edge $\{i,j\}$ or $(i,j)$ is assigned a numerical weight $w(i,j)$.
+The main objects considered in this paper are graphs. A \emph{graph} $G$ is made up of a finite set of vertices $V(G)=\{1,\dots,n\}$ and and a finite set of edges $E(G)$. The vertices of a graph are typically represented by points in the plane and an edge by a line or curve in the plane that connects two vertices. A graph can be \emph{undirected}, meaning that each edge $\{i,j\}\in E$ can be thought of as an unordered set or a multiset if $i=j$ ($\{i,i\}\in E$). A graph is \emph{directed} when each edge is {\emph{directed}, in which case $(i,j)$ is an ordered pair. In both directed and undirected graphs, a} \emph{loop} is an edge with only one vertex ($\{i, i\}\in E$). A \emph{weighted graph} is a graph, either directed or undirected, in which each edge $\{i,j\}$ or $(i,j)$ is assigned a numerical weight $w(i,j)$.
 
-In practice there are a number of matrices that are often associated with a given graph $G$. Two of the most common are the adjacency matrix $A=A(G)$ and the Laplacian matrix $L=L(G)$ of a graph $G$. The adjacency matrix of a graph is the $0$-$1$ matrix given by
+In practice there are a number of matrices that may be associated with a given graph $G$. Two of the most common are the adjacency matrix $A=A(G)$ and the Laplacian matrix $L=L(G)$ of a graph $G$. The adjacency matrix of a graph is the $0$-$1$ matrix given by
 \[
 A_{ij}=
 \begin{cases}
@@ -200,18 +201,20 @@ To define the Laplacian matrix of a \emph{simple graph} $G$, i.e. an unweighted 
 
 For an $n\times n$ matrix $M=M(G)$ associated with a graph $G$ we let $\sigma(M)$ denote the \emph{eigenvalues} of $M$. For us $\sigma(M)$ is a multiset with each eigenvalue in $\sigma(M)$ listed according to its multiplicity.
 
-One of our main concerns in this paper is understanding how symmetries in a graph's structure (i) affect the eigenvalues and eigenvectors of a matrix $M=M(G)$ and (ii) how these symmetries can be used to decompose the matrix $M$ into a number of smaller matrices in a way that preserves the eigenvalues of $M$. Such graph symmetries are formally described by the graph's set of automorphisms.
+\afcomm{
+One of our main concerns in this paper is understanding how symmetries in a graph's structure (i) affect the eigenvalues and eigenvectors of a matrix $M=M(G)$ and (ii) how these symmetries can be used to decompose the matrix $M$ into a number of smaller matrices in a way that preserves the eigenvalues of $M$. Such graph symmetries are formally described by the graph's set of automorphisms.}
 
 \begin{defn}
-An \emph{automorphism} $\phi$ of an unweighted graph $G$ is a permutation of $V(G)$ such that the adjacency matrix $A=A(G)$ satisfies $A_{ij} = A_{\phi(i) \phi(j)}$ for each pair of vertices $i$ and $j$. Note that  this is equivalent to saying
-$i$ and $j$ are adjacent in $G$ if and only if $\phi(i)$ and $\phi(j)$ are adjacent in $G$. For a weighted graph $G$, if $w(i,j) = w(\phi(i), \phi(j))$ for each pair of vertices $i$ and $j$, then $\phi$ is an automorphism of $G$.
+An \emph{automorphism} $\phi$ of an unweighted graph $G$ is a bijection $\phi: V(G) \to V(G)$ such that $\{i,j\}$ (or $(i,j)$) is in $E(G)$ if and only if $\{\phi(i), \phi(j)\}$ (or $(\phi(i), \phi(j))$) is in $E(G)$. For a weighted graph $G$, if $w(i,j) = w(\phi(i), \phi(j))$ for each pair of vertices $i$ and $j$, then $\phi$ is an automorphism of $G$.
 
-The set of all automorphisms of $G$ is a group, denoted by $\Aut(G)$. The \emph{order} of $\phi$ is the smallest positive integer $\ell$ such that $\phi^\ell$ is the identity.
+The set of all automorphisms of $G$ is a group, denoted by $\Aut(G)$. The \emph{order} of $\phi$ is the smallest positive integer $\ell$ such that $\phi^\ell$ is the identity map on $V(G)$.
 \end{defn}
 
 \begin{remark}\label{rem:orbits}
-For a graph $G$ with automorphism $\phi$, we define the relation $\sim$ on $V(G)$ by $u \sim v$ if and only if $v = \phi^j(u)$ for some nonnegative integer $j$. It follows that $\sim$ is an equivalence relation on $V(G)$, and the equivalence classes are called the \emph{orbits} of $\phi$. The orbit associated with the vertex $i$ is denoted $\so_\phi(i)$. Here, as in \cite{BFW} we consider those matrices $M=M(G)$ associated with a graph $G$ whose structure mimics the symmetries of the graph.
+For a graph $G$ with automorphism $\phi$, we define the relation $\sim$ on $V(G)$ by $u \sim v$ if and only if $v = \phi^j(u)$ for some nonnegative integer $j$. It follows that $\sim$ is an equivalence relation on $V(G)$, and the equivalence classes are called the \emph{orbits} of $\phi$. The orbit associated with the vertex $i$ is denoted $\so_\phi(i)$. 
 \end{remark}
+
+Here, as in \cite{BFW} we consider those matrices $M=M(G)$ associated with a graph $G$ whose structure mimics the symmetries of the graph.
 
 \begin{defn}\label{def:autocomp}\textbf{(Automorphism Compatible)}
 Let $G$ be a graph on $n$ vertices. An $n \times n$ matrix $M$ is \emph{automorphism compatible} on $G$ if, given any automorphism $\phi$ of $G$ and any $i, j \in \{1, 2, \ldots, n\}$,
@@ -220,7 +223,7 @@ $M_{\phi(i) \phi(j)} = M_{i j}$.
 
 Some of the most well-known matrices that are associated with a graph are automorphism compatible. This includes the adjacency matrix, combinatorial Laplacian matrix, signless Laplacian matrix, normalized Laplacian matrix, and distance matrix of a simple graph. Additionally, the weighted adjacency matrix of a weighted graph is automorphism compatible. (See Proposition 3.4, \cite{BFW}.)
 
-If $M=M(G)$ is an automorphism compatible matrix, $M$ can be decomposed over an automorphism $\phi$ of $G$ into a number of smaller matrices if $\phi$ is a basic automorphism.% (see Theorem \ref{thm:2}).
+%If $M=M(G)$ is an automorphism compatible matrix, \cite{BFW} and \cite{FSSW} show that $M$ can be decomposed over an automorphism $\phi$ of $G$ into a number of smaller matrices if the cycles and order of $\phi$ satisfy certain properties.  This decomposition is called an \emph{equitable decomposition}. % (see Theorem \ref{thm:2}).
 
 %\begin{defn} \textbf{(Basic Automorphism)}
 %If $\phi$ is an automorphism of a graph $G$ with orbits of size $k >1$ and possibly 1, then $\phi$ is a \textit{basic automorphism} of $G$ with orbit size $k$. Any vertices with orbit size 1 are said to be \emph{fixed} by $\phi$.
@@ -260,47 +263,333 @@ $ is called the \defital{divisor matrix} of $M$ associated with the partition $\
 
 Equitable partitions were originally defined for \emph{simple graphs}. For such graphs the requirement that $\pi$ be an equitable partition is equivalent to the condition that any vertex $\ell \in V_i$ has the same number of neighbors in $V_j$ for all $i,j \in \{1, \ldots, k\}$ (for example, see p. 195-6 of  \cite{Godsil}).
 
-An important fact noted in \cite{BFW} is that, if $\phi$ is a basic automorphism of $G$ and $M$ is an automorphism compatible matrix associated with $G$, the orbits of $\phi$ form an equitable partition of $V(G)$ (see Proposition 3.2, \cite{BFW}). If $M$ is equitably decomposed over the basic automorphism $\phi$ as in Equation \eqref{eq:spectrum2}, the matrix $M_\phi$ in the resulting decomposition is in fact the divisor matrix $D$ associated with the equitable partition induced by $\phi$ (see Theorem 4.4, \cite{BFW}), which is the reason this decomposition is referred to as an equitable decomposition. In \cite{FSSW} this concept was extended to include all separable automorphisms $\phi$ by introducing a recursive process of equitable decompositions.
+An important fact noted in \cite{BFW} is that, if $\phi$ is any automorphism of $G$ and $M$ is a matrix associated with $G$ that is compatible with $\phi$, the orbits of $\phi$ form an equitable partition of $V(G)$ (see Proposition 3.2, \cite{BFW}). In \cite{BFW} and \cite{FSSW} it is shown that $M$ can be decomposed over $\phi$ of $G$ into a number of smaller matrices if the cycles and order of $\phi$ satisfy certain properties, and that one of the matrices in this decomposition is the divisor matrix $D$ associated with the equitable partition induced by $\phi$ (see Theorem 4.4, \cite{BFW}). This decomposition is called an \emph{equitable decomposition}.
 
-If a graph $G$ has a non-basic and non-separable automorphism $\phi$, the current theory of equitable decompositions does not directly allow us to decompose a matrix $M=M(G)$ over $\phi$. In the following section we show that an automorphism compatible matrix $M$ can be decomposed with respect to any automorphism $\phi$ of $G$ via a sequence of basic automorphisms.
+If a graph $G$ has an automorphism $\phi$ whose order and cycles do not satisfy the conditions set out in \cite{BFW} and \cite{FSSW}, the current theory of equitable decompositions does not directly allow us to decompose $G$ or any of its associated matrices over $\phi$. In this paper we show that an automorphism compatible matrix $M$ can be decomposed with respect to \emph{any} automorphism $\phi$ of $G$ via a sequence of basic automorphisms. 
+
+
+In \cite{FSSW}, a method was presented for equitably decomposing a matrix $M$ over an automorphism $\phi$, so long as the order of $\phi$ does not have a repeated prime in its prime decomposition i.e. $|\phi |=p_1\cdot p_2\cdot \dots \cdot p_k$ where $p_i\neq p_j$ for any $1\leq i < j \leq k$.  This was accomplished using a series of decompositions, one for each prime. One might naively believe that we could also use this method to decomposed a matrix with an automorphism whose order is $p^N$, by repeating the process as outlined but using the same prime number on subsequent steps.  The following is an example showing this method does  not work in general and demonstrating a  need for a more sophisticated method to decompose matrices over automorphisms of order $p^N$.
+
 
 \begin{example}\label{ex:1}
-In the previous paper, we demonstrated a method to Equitably decompose a matrix $M$ over an automorphism $\phi$, so long as the order of $\phi$ does not have a repeated prime in its prime decomposition i.e. $|\phi |=p_1\cdot p_2\cdot \dots \cdot p_k$ where $p_i\neq p_j$ for any $1\leq i < j \leq k$.  This was accomplished by doing a series of decompositions, one for each prime. One might naively believe that we could also use this method to decomposed a matrix with an automorphism whose order is $p^N$, by just repeating the process as outlined but using same prime number on subsequent steps.  The following is an example showing this method does  not always work and thus justifying the need for a more sophisticated method to decompose matrices over automorphism of order $p^N$.
 
 Consider the following matrix and its corresponding adjacency graph.
 
-\begin{center}
-\includegraphics[scale=.7]{ex1_0.pdf}
-$ \left[\begin{array}{llllllllllll}
+\begin{figure}[h]
+\begin{tabular}{cc}
+\begin{minipage}[b]{.47\textwidth}
+%\usepackage{pgf,tikz}
+%\usepackage{mathrsfs}
+%\usetikzlibrary{arrows}
+%\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm,scale = .5]
+%%\clip(-6.087033404599149,-4.095074104483087) rectangle (19.4797481558473,9.707823845282762);
+%\draw [line width=1.2pt] (4.,0.)-- (0.6246022441943575,0.9201314068200664);
+%\draw [line width=1.2pt] (8.,0.)-- (11.37417784304358,0.9003902687660097);
+%\draw [line width=1.2pt] (6.,3.4641016151377553)-- (8.466397374319238,5.946533964053483);
+%\draw [line width=1.2pt] (5.983965025403511,8.412931338372719)-- (8.466397374319238,5.946533964053483);
+%\draw [line width=1.2pt] (5.983965025403511,8.412931338372719)-- (3.517567651084274,5.930498989456993);
+%\draw [line width=1.2pt] (3.517567651084274,5.930498989456993)-- (6.,3.4641016151377553);
+%\draw [line width=1.2pt] (3.517567651084274,5.930498989456993)-- (8.466397374319238,5.946533964053483);
+%\draw [line width=1.2pt] (5.983965025403511,8.412931338372719)-- (6.,3.4641016151377553);
+%\draw [line width=1.2pt] (6.,3.4641016151377553)-- (4.,0.);
+%\draw [line width=1.2pt] (4.,0.)-- (8.,0.);
+%\draw [line width=1.2pt] (8.,0.)-- (6.,3.4641016151377553);
+%\draw [line width=1.2pt] (0.6246022441943575,0.9201314068200664)-- (-0.2955291626257086,-2.4552663489855755);
+%\draw [line width=1.2pt] (-0.2955291626257086,-2.4552663489855755)-- (3.079868593179933,-3.3753977558056425);
+%\draw [line width=1.2pt] (3.079868593179933,-3.3753977558056425)-- (4.,0.);
+%\draw [line width=1.2pt] (0.6246022441943575,0.9201314068200664)-- (3.079868593179933,-3.3753977558056425);
+%\draw [line width=1.2pt] (-0.2955291626257086,-2.4552663489855755)-- (4.,0.);
+%\draw [line width=1.2pt] (8.,0.)-- (8.900390268766012,-3.374177843043581);
+%\draw [line width=1.2pt] (8.900390268766012,-3.374177843043581)-- (12.27456811180959,-2.4737875742775692);
+%\draw [line width=1.2pt] (12.27456811180959,-2.4737875742775692)-- (11.37417784304358,0.9003902687660097);
+%\draw [line width=1.2pt] (11.37417784304358,0.9003902687660097)-- (8.900390268766012,-3.374177843043581);
+%\draw [line width=1.2pt] (8.,0.)-- (12.27456811180959,-2.4737875742775692);
+%\draw [line width=1.2pt] (0.6246022441943575,0.9201314068200664)-- (8.466397374319238,5.946533964053483);
+%\draw [line width=1.2pt] (8.466397374319238,5.946533964053483)-- (8.900390268766012,-3.374177843043581);
+%\draw [line width=1.2pt] (8.900390268766012,-3.374177843043581)-- (-0.2955291626257086,-2.4552663489855755);
+%\draw [line width=1.2pt] (-0.2955291626257086,-2.4552663489855755)-- (5.983965025403511,8.412931338372719);
+%\draw [line width=1.2pt] (5.983965025403511,8.412931338372719)-- (12.27456811180959,-2.4737875742775692);
+%\draw [line width=1.2pt] (12.27456811180959,-2.4737875742775692)-- (3.079868593179933,-3.3753977558056425);
+%\draw [line width=1.2pt] (3.079868593179933,-3.3753977558056425)-- (3.517567651084274,5.930498989456993);
+%\draw [line width=1.2pt] (3.517567651084274,5.930498989456993)-- (11.37417784304358,0.9003902687660097);
+%\draw [line width=1.2pt] (11.37417784304358,0.9003902687660097)-- (0.6246022441943575,0.9201314068200664);
+%\begin{scriptsize}
+%\draw [fill=black] (8.,0.) circle (4.5pt);
+%\draw[color=black] (7.404094513824409,0.3362030964017933) node {$1$};
+%\draw [fill=black] (4.,0.) circle (4.5pt);
+%\draw[color=black] (4.622615739116397,0.3362030964017933) node {$2$};
+%\draw [fill=black] (6.,3.4641016151377553) circle (4.5pt);
+%\draw[color=black] (6,2.9) node {$3$};
+%\draw [fill=black] (8.900390268766012,-3.374177843043581) circle (4.5pt);
+%\draw[color=black] (9.01414680518624,-2.8480538621000218) node {$10$};
+%\draw [fill=black] (12.27456811180959,-2.4737875742775692) circle (4.5pt);
+%\draw[color=blue] (12.39840376368805,-1.938001570738189) node {$4$};
+%\draw [fill=black] (11.37417784304358,0.9003902687660097) circle (4.5pt);
+%\draw[color=blue] (11.488351472326219,1.4178162536585688) node {$7$};
+%\draw [fill=black] (0.6246022441943575,0.9201314068200664) circle (4.5pt);
+%\draw[color=blue] (0.7383587806145865,1.446255387763626) node {$5$};
+%\draw [fill=blue] (-0.2955291626257086,-2.4552663489855755) circle (4.5pt);
+%\draw[color=black] (-0.17169351074724498,-1.938001570738189) node {$8$};
+%\draw [fill=blue] (3.079868593179933,-3.3753977558056425) circle (4.5pt);
+%\draw[color=black] (3.1841243136495083,-2.8480538621000218) node {$11$};
+%\draw [fill=blue] (8.466397374319238,5.946533964053483) circle (4.5pt);
+%\draw[color=black] (8.587559793610382,6.479982124358762) node {$12$};
+%\draw [fill=blue] (5.983965025403511,8.412931338372719) circle (4.5pt);
+%\draw[color=black] (6.084915992365346,8.92574765739369) node {$6$};
+%\draw [fill=blue] (3.517567651084274,5.930498989456993) circle (4.5pt);
+%\draw[color=black] (3.5391504593304242,6.451542990253705) node {$9$};
+%\end{scriptsize}
+%\end{tikzpicture}
+
+
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm,scale = .85]
+%\clip(-7.216177612974291,1.3842039200742227) rectangle (7.441668823143576,11.680614135410199);
+\draw [line width=1.2pt] (-0.6,3.62)-- (2.123558053023431,9.276851992900792);
+\draw [line width=1.2pt] (-4.137198504789,8.807096459050374)-- (2.123558053023431,9.276851992900792);
+\draw [line width=1.2pt] (-4.137198504789,8.807096459050374)-- (-0.6,3.62);
+\draw [line width=1.2pt] (-2.9869038033291604,4.291334665910222)-- (-2.3623537280050293,10.538548456168009);
+\draw [line width=1.2pt] (-2.3623537280050293,10.538548456168009)-- (2.735617079568619,6.874065329872934);
+\draw [line width=1.2pt] (2.735617079568619,6.874065329872934)-- (-2.9869038033291604,4.291334665910222);
+\draw [line width=1.2pt] (-4.383852592928873,6.339879046497543)-- (0.11021214116330502,10.724069405453623);
+\draw [line width=1.2pt] (0.11021214116330502,10.724069405453623)-- (1.66,4.64);
+\draw [line width=1.2pt] (1.66,4.64)-- (-4.383852592928873,6.339879046497543);
+\draw [line width=1.2pt] (-4.383852592928873,6.339879046497543)-- (-4.137198504789,8.807096459050374);
+\draw [line width=1.2pt] (-4.137198504789,8.807096459050374)-- (-2.3623537280050293,10.538548456168009);
+\draw [line width=1.2pt] (-2.3623537280050293,10.538548456168009)-- (0.11021214116330502,10.724069405453623);
+\draw [line width=1.2pt] (0.11021214116330502,10.724069405453623)-- (2.123558053023431,9.276851992900792);
+\draw [line width=1.2pt] (2.123558053023431,9.276851992900792)-- (2.735617079568619,6.874065329872934);
+\draw [line width=1.2pt] (2.735617079568619,6.874065329872934)-- (1.66,4.64);
+\draw [line width=1.2pt] (1.66,4.64)-- (-0.6,3.62);
+\draw [line width=1.2pt] (-0.6,3.62)-- (-2.9869038033291604,4.291334665910222);
+\draw [line width=1.2pt] (-2.9869038033291604,4.291334665910222)-- (-4.383852592928873,6.339879046497543);
+\draw [line width=1.2pt] (-1.8285211049496375,6.806067771006954)-- (-2.3623537280050293,10.538548456168009);
+\draw [line width=1.2pt] (-1.8285211049496375,6.806067771006954)-- (2.735617079568619,6.874065329872934);
+\draw [line width=1.2pt] (-1.8285211049496375,6.806067771006954)-- (-2.9869038033291604,4.291334665910222);
+\draw [line width=1.2pt] (0.001571740633340254,6.156128255753188)-- (-1.8285211049496375,6.806067771006954);
+\draw [line width=1.2pt] (-0.3918127028097297,8.208568830238764)-- (-1.8285211049496375,6.806067771006954);
+\draw [line width=1.2pt] (-0.3918127028097297,8.208568830238764)-- (0.001571740633340254,6.156128255753188);
+\draw [line width=1.2pt] (0.001571740633340254,6.156128255753188)-- (0.11021214116330502,10.724069405453623);
+\draw [line width=1.2pt] (0.001571740633340254,6.156128255753188)-- (1.66,4.64);
+\draw [line width=1.2pt] (0.001571740633340254,6.156128255753188)-- (-4.383852592928873,6.339879046497543);
+\draw [line width=1.2pt] (-0.3918127028097297,8.208568830238764)-- (-4.137198504789,8.807096459050374);
+\draw [line width=1.2pt] (-0.3918127028097297,8.208568830238764)-- (2.123558053023431,9.276851992900792);
+\draw [line width=1.2pt] (-0.3918127028097297,8.208568830238764)-- (-0.6,3.62);
+\begin{scriptsize}
+\draw [fill=blue] (-0.6,3.62) circle (3.5pt);
+\draw[color=black] (-0.5286420744421019,3.24120280245417) node {$4$};
+\draw [fill=blue] (1.66,4.64) circle (3.5pt);
+\draw[color=black] (1.7290425574920387,4.250319418242912) node {$5$};
+\draw [fill=blue] (2.735617079568619,6.874065329872934) circle (3.5pt);
+\draw[color=black] (3.1065738590969693,6.890900378723) node {$6$};
+\draw [fill=blue] (2.123558053023431,9.276851992900792) circle (3.5pt);
+\draw[color=black] (2.1908416867512948,9.585414382289507) node {$7$};
+\draw [fill=blue] (0.11021214116330502,10.724069405453623) circle (3.5pt);
+\draw[color=black] (0.17260845517380546,11.039226455883457) node {$8$};
+\draw [fill=blue] (-2.3623537280050293,10.538548456168009) circle (3.5pt);
+\draw[color=black] (-2.2903202342088935,10.851086069888945) node {$9$};
+\draw [fill=blue] (-4.137198504789,8.807096459050374) circle (3.5pt);
+\draw[color=black] (-4.569102065429732,8.923615253030252) node {$10$};
+\draw [fill=blue] (-4.383852592928873,6.339879046497543) circle (3.5pt);
+\draw[color=black] (-4.808553465786383,6.260686563647559) node {$11$};
+\draw [fill=blue] (-2.9869038033291604,4.291334665910222) circle (3.5pt);
+\draw[color=black] (-2.9231560780086148,3.908245989161983) node {$12$};
+\draw [fill=blue] (-1.8285211049496375,6.806067771006954) circle (3.5pt);
+\draw[color=black] (-2.1601064191334512,6.822485692906814) node {$3$};
+\draw [fill=blue] (0.001571740633340254,6.156128255753188) circle (3.5pt);
+\draw[color=black] (0.26998642644952634,6.172546177653048) node {$2$};
+\draw [fill=blue] (-0.3918127028097297,8.208568830238764) circle (3.5pt);
+\draw[color=black] (-0.32339801699354365,8.524986752138625) node {$1$};
+\end{scriptsize}
+\end{tikzpicture}
+\end{minipage}&
+%\includegraphics[scale=.7]{ex1_0.pdf}
+
+\begin{minipage}[b]{.47\textwidth}
+
+ $\left[\begin{array}{lll || lll | lll | lll}
 0 & 1 & 1 & 1 & 0 & 0 & 1 & 0 &  0 & 1 & 0 & 0\\
 1 & 0 & 1 & 0 & 1 & 0 & 0 & 1 & 0 &  0 &  1 &  0\\
-1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1\\
-1 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0\\
-0 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 1 & 1\\
-0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 1\\
-1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0\\
-0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 1 & 0\\
-0 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 1\\
-1 & 0 & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1\\
-0 & 1 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 0\\
-0 & 0 & 1 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0
+1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 0 & 1\\\hline \hline 
+1 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 1 & 0 & 1\\
+0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 1 &0\\
+0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 1\\\hline
+1 & 0 & 0 & 1 &0 & 1 & 0 & 1 & 0 & 1 & 0 & 0\\
+0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0\\
+0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1\\\hline
+1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 1 & 0\\
+0 & 1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 1\\
+0 & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 0
 \end{array}\right]$
+\vspace{.5cm}
 
-\end{center}
+\end{minipage}
+\end{tabular}
+\caption{The graph $G$ on 12 vertices with automorphism $\phi=(1,2,3)(4,5,6,7,8,9,10,11,12)$, and its adjacency matrix.}
+\end{figure}
 
-This matrix has the following automorphism: $$\phi=(1,2,3)(4,5,6,7,8,9,10,11,12)$$
-Now attempting to use the method outlined in the previous paper, we first form a new automorphism $\psi=\phi^3=(4,7,10)(5,8,11)(6,9,12)$. One decomposition using this original method results a matrix with the following associated adjacency graph.
+We attempt to follow the recursive method of equitable decompositions for separable automorphisms \cite{FSSW} by first forming a new automorphism $\psi=\phi^3=(4,7,10)(5,8,11)(6,9,12)$. The first decomposition gives a direct sum of smaller matrices with the following associated digraphs.
+
+\begin{figure}[h!]
 \begin{center}
-\includegraphics[scale=.5]{ex1_1.pdf}
+$\left[\begin{array}{lll | lll }
+0 & 1 & 1 & 3 & 0 & 0 \\
+1 & 0 & 1 & 0 & 3 & 0\\
+1 & 1 & 0 & 0 & 0 & 3 \\\hline 
+1 & 0 & 0 & 2 & 1 & 1 \\
+0 & 1 & 0 & 1 & 2 & 1 \\
+0 & 0 & 1 & 1 & 1 & 2 
+\end{array}\right] \oplus 
+\left[\begin{array}{lll }
+\w +\w^2& 1 & \w^2  \\
+1 & \w + \w^2 & 1 \\
+\w & 1 & \w + \w^2  \\
+\end{array}\right]\oplus 
+\left[\begin{array}{lll }
+\w +\w^2& 1 & \w  \\
+1 & \w + \w^2 & 1 \\
+\w^2 & 1 & \w + \w^2  \\
+\end{array}\right]$ \\[2mm]
+
+
+\begin{tabular}{c}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm, scale = .4]
+\draw [line width=1.2pt] (3.,2.)-- (1.42,-0.74);
+\draw [line width=1.2pt] (1.42,-0.74)-- (4.582909606369362,-0.738320137979414);
+\draw [line width=1.2pt] (4.582909606369362,-0.738320137979414)-- (3.,2.);
+\draw [->, shift={(8.746530801304676,3.9975601362061384)},line width=1.2pt]  plot[domain=2.808109490764957:3.47613804206866,variable=\t]({1.*6.083819749803839*cos(\t r)+0.*6.083819749803839*sin(\t r)},{0.*6.083819749803839*cos(\t r)+1.*6.083819749803839*sin(\t r)});
+\draw [->,shift={(-2.7619038286835558,3.9914478583805644)},line width=1.2pt]  plot[domain=-0.3327703910467745:0.33383261670080516,variable=\t]({1.*6.096343191097985*cos(\t r)+0.*6.096343191097985*sin(\t r)},{0.*6.096343191097985*cos(\t r)+1.*6.096343191097985*sin(\t r)});
+\draw [->, shift={(2.574873153942068,-6.730834430650846)},line width=1.2pt]  plot[domain=1.7612336156607167:2.4286188147797056,variable=\t]({1.*6.1011334338111105*cos(\t r)+0.*6.1011334338111105*sin(\t r)},{0.*6.1011334338111105*cos(\t r)+1.*6.1011334338111105*sin(\t r)});
+\draw [->,shift={(-3.190222966731918,3.2423685501799246)},line width=1.2pt]  plot[domain=4.902310947532458:5.570726790087551,variable=\t]({1.*6.09207805863029*cos(\t r)+0.*6.09207805863029*sin(\t r)},{0.*6.09207805863029*cos(\t r)+1.*6.09207805863029*sin(\t r)});
+\draw [->,shift={(3.4409228960059806,-6.713365807470568)},line width=1.2pt]  plot[domain=0.7135095119397563:1.3819478161074714,variable=\t]({1.*6.083198533596579*cos(\t r)+0.*6.083198533596579*sin(\t r)},{0.*6.083198533596579*cos(\t r)+1.*6.083198533596579*sin(\t r)});
+\draw [->,shift={(9.177088828763083,3.23416245566517)},line width=1.2pt]  plot[domain=3.854546186837524:4.524096448389289,variable=\t]({1.*6.073475173595705*cos(\t r)+0.*6.073475173595705*sin(\t r)},{0.*6.073475173595705*cos(\t r)+1.*6.073475173595705*sin(\t r)});
+\draw [->,shift={(2.9803003568273967,6.988860475994255)},line width=1.2pt]  %(0,0) --
+  plot[domain=-1.5532143950535158:4.314098663792105,variable=\t]({1.*1.*cos(\t r)+0.*1.*sin(\t r)},{0.*1.*cos(\t r)+1.*1.*sin(\t r)}) ;%-- cycle ;
+\draw [->,shift={(8.89586008462023,-3.249577222650493)},line width=1.2pt]    plot[domain=-3.6856496994623047:2.1335046414728542,variable=\t]({1.*1.*cos(\t r)+0.*1.*sin(\t r)},{0.*1.*cos(\t r)+1.*1.*sin(\t r)})  ;
+\draw [->,shift={(-2.911791543957258,-3.2303056150093457)},line width=1.2pt]   plot[domain=0.512248008742023:6.265411724401079,variable=\t]({1.*1.*cos(\t r)+0.*1.*sin(\t r)},{0.*1.*cos(\t r)+1.*1.*sin(\t r)});
+\draw [line width=1.2pt] (2.9978813827489854,5.9890150341745985)-- (-2.0401466673309936,-2.7401676660080625);
+\draw [line width=1.2pt] (-2.0401466673309936,-2.7401676660080625)-- (8.040244329607463,-2.7319657083137923);
+\draw [line width=1.2pt] (8.040244329607463,-2.7319657083137923)-- (2.9978813827489854,5.9890150341745985);
+\begin{scriptsize}
+\draw [fill=blue] (3.,2.) circle (4.5pt);
+\draw[color=blue] (3.3797862649889464,2.1344492655878913) node {${\bf 1}$};
+\draw [fill=blue] (1.42,-0.74) circle (4.5pt);
+\draw[color=blue] (1.0607506144093768,-0.2652055658528048) node {${\bf 2}$};
+\draw [fill=blue] (4.582909606369362,-0.738320137979414) circle (4.5pt);
+\draw[color=blue] (4.621528751385895,-0.291008305975823) node {${\bf3}$};
+\draw [fill=blue] (2.9978813827489854,5.9890150341745985) circle (4.5pt);
+\draw[color=blue] (3.5797862649889464,5.901649323548554) node {${\bf4}$};
+\draw [fill=blue] (-2.0401466673309936,-2.7401676660080625) circle (4.5pt);
+\draw[color=blue] (-2.1903946410909225,-2.045594634341063) node {${\bf5}$};
+\draw [fill=blue] (8.040244329607463,-2.7319657083137923) circle (4.5pt);
+\draw[color=blue] (8,-2.0972001145870998) node {${\bf6}$};
+
+\draw[color=black] (5.9797862649889464,2.101649323548554) node {$1$};
+\draw[color=black] (0,2.101649323548554) node {$1$};
+\draw[color=black] (3,-3.101649323548554) node {$1$};
+\draw[color=black] (10.1,-4.301649323548554) node {$2$};
+\draw[color=black] (-4.1,-4.301649323548554) node {$2$};
+\draw[color=black] (3,8.5) node {$2$};
+\draw[color=black] (3.7,4.1) node {$3$};
+\draw[color=black] (2.3,4.1) node {$1$};
+\draw[color=black] (-.1,-.8) node {$3$};
+\draw[color=black] (0.5,-2) node {$1$};
+\draw[color=black] (6.1,-.8) node {$3$};
+\draw[color=black] (5.5,-2) node {$1$};
+\draw[color=black] (2.1,1) node {$1$};
+\draw[color=black] (4,1) node {$1$};
+\draw[color=black] (3,-1) node {$1$};
+\end{scriptsize}
+\end{tikzpicture}
+
+
+\hspace*{-.7cm}\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm,scale = .3]
+%\clip(-8.537868711353411,-7.65769061109753) rectangle (12.439759008660426,8.778654847265086);
+\draw [->, shift={(3.0130847985281797,-18.75756462853538)},line width=1.2pt]  plot[domain=1.2668226187643103:1.8763973439024366,variable=\t]({1.*16.79559923619067*cos(\t r)+0.*16.79559923619067*sin(\t r)},{0.*16.79559923619067*cos(\t r)+1.*16.79559923619067*sin(\t r)});
+\draw [->, shift={(19.37392598872407,9.63923476036045)},line width=1.2pt]  plot[domain=3.3609073531733613:3.970731049757719,variable=\t]({1.*16.777930175868597*cos(\t r)+0.*16.777930175868597*sin(\t r)},{0.*16.777930175868597*cos(\t r)+1.*16.777930175868597*sin(\t r)});
+\draw [->, shift={(-8.333612517864772,-6.380920499656055)},line width=1.2pt]  plot[domain=0.2192694750466929:0.8291836207048014,variable=\t]({1.*16.775519638174345*cos(\t r)+0.*16.775519638174345*sin(\t r)},{0.*16.775519638174345*cos(\t r)+1.*16.775519638174345*sin(\t r)});
+\draw [->, shift={(14.35091983175103,-6.3818000228558365)},line width=1.2pt]  plot[domain=2.313319799013006:2.9229717803830764,variable=\t]({1.*16.790728012798304*cos(\t r)+0.*16.790728012798304*sin(\t r)},{0.*16.790728012798304*cos(\t r)+1.*16.790728012798304*sin(\t r)});
+\draw [->, shift={(-13.389609820737382,9.628583917256625)},line width=1.2pt]  plot[domain=5.454838648429755:6.064638238145913,variable=\t]({1.*16.786790330466452*cos(\t r)+0.*16.786790330466452*sin(\t r)},{0.*16.786790330466452*cos(\t r)+1.*16.786790330466452*sin(\t r)});
+\draw [->, shift={(2.9940079090559673,13.282142090759644)},line width=1.2pt]  plot[domain=4.407959240767685:5.017651628291141,variable=\t]({1.*16.794556327595302*cos(\t r)+0.*16.794556327595302*sin(\t r)},{0.*16.794556327595302*cos(\t r)+1.*16.794556327595302*sin(\t r)});
+\draw [shift={(2.9803003568273967,6.988860475994255)},line width=1.2pt,->]  plot[domain=-1.5532143950535158:4.014098663792105,variable=\t]({1.*1.*cos(\t r)+0.*1.*sin(\t r)},{0.*1.*cos(\t r)+1.*1.*sin(\t r)}) ;
+\draw [shift={(8.89586008462023,-3.249577222650493)},line width=1.2pt,->]    plot[domain=-3.6856496994623047:2.1335046414728542,variable=\t]({1.*1.*cos(\t r)+0.*1.*sin(\t r)},{0.*1.*cos(\t r)+1.*1.*sin(\t r)})  ;
+\draw [shift={(-2.911791543957258,-3.2303056150093457)},line width=1.2pt, ->]    plot[domain=0.512248008742023:6.265411724401079,variable=\t]({1.*1.*cos(\t r)+0.*1.*sin(\t r)},{0.*1.*cos(\t r)+1.*1.*sin(\t r)})  ;
+\begin{scriptsize}
+\draw [fill=blue] (2.9978813827489854,5.9890150341745985) circle (4pt);
+\draw[color=blue] (4.1797862649889464,5.901649323548554) node {${\bf 2}$};
+\draw [fill=blue] (-2.0401466673309936,-2.7401676660080625) circle (4pt);
+\draw[color=blue] (-2.4903946410909225,-1.745594634341063) node {${\bf 3}$};
+\draw [fill=blue] (8.040244329607463,-2.7319657083137923) circle (4pt);
+\draw[color=blue] (8.472674006886195,-1.6972001145870998) node {${\bf 1}$};
+
+\draw[color=black] (-1,2.101649323548554) node {$1$};
+\draw[color=black] (3,-4) node {$\w$};
+\draw[color=black] (10.1,-4.301649323548554) node {$-1$};
+\draw[color=black] (-4.1,-4.301649323548554) node {$-1$};
+\draw[color=black] (3,8.5) node {$-1$};
+%\draw[color=black] (10.1,-4.301649323548554) node {$\w + \w^2$};
+%\draw[color=black] (-4.1,-4.301649323548554) node {$\w + \w^2$};
+%\draw[color=black] (3,8.5) node {$\w + \w^2$};
+\draw[color=black] (3,-1.3) node {$\w^2$};
+\draw[color=black] (2,1.5) node {$1$};
+\draw[color=black] (5,1.5) node {$1$};
+\draw[color=black] (7,2.101649323548554) node {$1$};
+\draw[color=black] (3,-10) node {$$};
+
+
+\end{scriptsize}
+\end{tikzpicture}
+
+
+\hspace*{-.7cm}\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm,scale = .3]
+%\clip(-8.537868711353411,-7.65769061109753) rectangle (12.439759008660426,8.778654847265086);
+\draw [->, shift={(3.0130847985281797,-18.75756462853538)},line width=1.2pt]  plot[domain=1.2668226187643103:1.8763973439024366,variable=\t]({1.*16.79559923619067*cos(\t r)+0.*16.79559923619067*sin(\t r)},{0.*16.79559923619067*cos(\t r)+1.*16.79559923619067*sin(\t r)});
+\draw [->, shift={(19.37392598872407,9.63923476036045)},line width=1.2pt]  plot[domain=3.3609073531733613:3.970731049757719,variable=\t]({1.*16.777930175868597*cos(\t r)+0.*16.777930175868597*sin(\t r)},{0.*16.777930175868597*cos(\t r)+1.*16.777930175868597*sin(\t r)});
+\draw [->, shift={(-8.333612517864772,-6.380920499656055)},line width=1.2pt]  plot[domain=0.2192694750466929:0.8291836207048014,variable=\t]({1.*16.775519638174345*cos(\t r)+0.*16.775519638174345*sin(\t r)},{0.*16.775519638174345*cos(\t r)+1.*16.775519638174345*sin(\t r)});
+\draw [->, shift={(14.35091983175103,-6.3818000228558365)},line width=1.2pt]  plot[domain=2.313319799013006:2.9229717803830764,variable=\t]({1.*16.790728012798304*cos(\t r)+0.*16.790728012798304*sin(\t r)},{0.*16.790728012798304*cos(\t r)+1.*16.790728012798304*sin(\t r)});
+\draw [->, shift={(-13.389609820737382,9.628583917256625)},line width=1.2pt]  plot[domain=5.454838648429755:6.064638238145913,variable=\t]({1.*16.786790330466452*cos(\t r)+0.*16.786790330466452*sin(\t r)},{0.*16.786790330466452*cos(\t r)+1.*16.786790330466452*sin(\t r)});
+\draw [->, shift={(2.9940079090559673,13.282142090759644)},line width=1.2pt]  plot[domain=4.407959240767685:5.017651628291141,variable=\t]({1.*16.794556327595302*cos(\t r)+0.*16.794556327595302*sin(\t r)},{0.*16.794556327595302*cos(\t r)+1.*16.794556327595302*sin(\t r)});
+\draw [shift={(2.9803003568273967,6.988860475994255)},line width=1.2pt,->]  plot[domain=-1.5532143950535158:4.014098663792105,variable=\t]({1.*1.*cos(\t r)+0.*1.*sin(\t r)},{0.*1.*cos(\t r)+1.*1.*sin(\t r)}) ;
+\draw [shift={(8.89586008462023,-3.249577222650493)},line width=1.2pt,->]    plot[domain=-3.6856496994623047:2.1335046414728542,variable=\t]({1.*1.*cos(\t r)+0.*1.*sin(\t r)},{0.*1.*cos(\t r)+1.*1.*sin(\t r)})  ;
+\draw [shift={(-2.911791543957258,-3.2303056150093457)},line width=1.2pt, ->]    plot[domain=0.512248008742023:6.265411724401079,variable=\t]({1.*1.*cos(\t r)+0.*1.*sin(\t r)},{0.*1.*cos(\t r)+1.*1.*sin(\t r)})  ;
+\begin{scriptsize}
+\draw [fill=blue] (2.9978813827489854,5.9890150341745985) circle (4pt);
+\draw[color=blue] (4.1797862649889464,5.901649323548554) node {${\bf 2}$};
+\draw [fill=blue] (-2.0401466673309936,-2.7401676660080625) circle (4pt);
+\draw[color=blue] (-2.4903946410909225,-1.745594634341063) node {${\bf 3}$};
+\draw [fill=blue] (8.040244329607463,-2.7319657083137923) circle (4pt);
+\draw[color=blue] (8.472674006886195,-1.6972001145870998) node {${\bf 1}$};
+
+\draw[color=black] (-1,2.101649323548554) node {$1$};
+\draw[color=black] (3,-4) node {$\w^2$};
+\draw[color=black] (10.1,-4.301649323548554) node {$-1$};
+\draw[color=black] (-4.1,-4.301649323548554) node {$-1$};
+\draw[color=black] (3,8.5) node {$-1$};
+%\draw[color=black] (10.1,-4.301649323548554) node {$\w + \w^2$};
+%\draw[color=black] (-4.1,-4.301649323548554) node {$\w + \w^2$};
+%\draw[color=black] (3,8.5) node {$\w + \w^2$};
+\draw[color=black] (3,-1.3) node {$\w$};
+\draw[color=black] (2,1.5) node {$1$};
+\draw[color=black] (5,1.5) node {$1$};
+\draw[color=black] (7,2.101649323548554) node {$1$};
+\end{scriptsize}
+\end{tikzpicture} \end{tabular}
 \end{center}
-In order to completely decompose this matrix, we would need to do a second decomposition for the other factor of 3.  However, looking at the weights on the adjacency graph, it is clear that there is no automorphism of order 3 which permutes all of the vertices like we should expect.  Thus we cannot do the second step.  This decomposition was done using $\cT_0=\{4,8,12\}$ for the first semi-transversal of the orbits as prescribed in the previous paper. One may wonder if a different choice of semi-transversal could remedy this problem. However; any choice of transversal will result in a matrix without an order 3 automorphism. Thus this method cannot be used to completely decompose this matrix.
+\caption{The decomposition of the graph $G$ on 12 vertices using the basic  automorphism $\psi=(4,7, 10), (5, 8, 11), (6, 9, 12)$.}
+\end{figure}
+
+
+%\begin{center}
+%\includegraphics[scale=.5]{ex1_1.pdf}
+%\end{center}
+While there is an automorphism of order three which acts on the first ``piece'' of the decomposed matrix, there is no automorphism permuting all of the vertices of $G$ as $\phi$ does.  Thus, if we continue the recursive process in this example, we fail to account for part of the symmetry found in $\phi$.   This decomposition was done using the transversal $\cT_0=\{4,8,12\}$ (See \cite{BFW, FSSW} for details). One may wonder if a different choice of semi-transversal could give better results. However, simple computations demonstrate that any choice of transversal yields a similarly unsatisfying conclusion. Thus we conclude that the methods contained in \cite{BFW} and \cite{FSSW} cannot be used to completely decompose examples like this.
 \end{example}
 
 \marginpar{\dscomm{we need to make a comment about the $N=1$ case.  It is a basic automorphism}}
 \section{Equitable Decompositions using Arbitrary Automorphisms}
+In this section we give a method for decomposing a graph using any automorphism.  First, however, we will need the following Lemma. 
 \begin{lem}\label{lem:Dallas}
-Let $M$ be the block matrix
-\begin{equation}\label{eq:circulant}
+Let $M$ be the $(f + rp^N) \times (f + rp^N)$ block matrix
+\begin{equation}\label{eq:defineM}
 M = \left[\begin{array}{llllll}
 F & H & H & H & \cdots & H \\
 L &  \\
@@ -310,7 +599,7 @@ L &  & C \\
 L &  \\
 \end{array}\right],
 \end{equation}
-where $F$ is $f \times f$, $H$ is $f \times rp^{N-1}$,  $L$ is $rp^{N-1} \times f$, and $C$ is $p^N \times p^N$.  Suppose that the submatrix $C$ (from the last $rp^N$ rows and columns) can be partitioned in two ways:
+where $F$ is $f \times f$, $H$ is $f \times rp^{N-1}$,  $L$ is $rp^{N-1} \times f$, and $C$ is $rp^N \times rp^N$.  Suppose that the matrix $C$ can be partitioned in two ways:
 \[
 C =  \left[\begin{array}{lllll}
  C_0 & C_1 & C_2 & \cdots & C_{p^N-1} \\
@@ -328,20 +617,17 @@ C =  \left[\begin{array}{lllll}
 \end{array}\right]
 \]
 with each $D_i$ block of size $rp^{N-1} \times rp^{N-1}$, and each $C_j$ of size $r \times r$.
-  Then there exists an $f + rp^{N} \times f  +rp^N$ matrix $T$ such that
-\[
-T^{-1} M T = \left[\begin{array}{rr} F & kH \\ L & B_0 \end{array}\right]
+  Then there exists an $(f + rp^{N}) \times (f  +rp^N)$ invertible matrix $T$ such that
+\begin{equation}\label{eq:sim_decomp}
+T^{-1} M T = \left[\begin{array}{rr} F & pH \\ L & B_0 \end{array}\right]
 \oplus B_1 \oplus B_2 \oplus \cdots \oplus B_{p^N-p^{N-1}},
-\]
-where
+\end{equation}
+with
 \[
-B_0 = \sum_{m=0}^{p-1} D_m,
+B_0 = \sum_{m=0}^{p-1} D_m, \ \text{and }
+B_j = \sum_{m=0}^{p^N-1} \omega^{\gamma_j m}C_m \ \ \text{for} \ \ j = 1,2, \ldots, p^N-p^{N-1}, 
 \]
-and
-\[
-B_j = \sum_{m=0}^{p^N-1} \omega^{\gamma_j m}C_m \ \ \text{for} \ \ j = 1,2, \ldots, p^N-p^{N-1}.
-\]
-where $\gamma_j$ are elements of $\{1,2,\dots ,p^N-1\}$ which are not multiples of $p$. Consequently,
+where  $\gamma_j$ are elements of $\{1,2,\dots ,p^N-1\}$ which are not multiples of $p$. Consequently,
 \[
 \sigma(M) = \sigma\left(\left[\begin{array}{rr} F & pH \\ L & B_0 \end{array}\right] \right)
 \cup \sigma(B_1) \cup \sigma(B_2) \cup \cdots \cup \sigma(B_{p^N-p^{N-1}}).
@@ -349,13 +635,15 @@ where $\gamma_j$ are elements of $\{1,2,\dots ,p^N-1\}$ which are not multiples 
 \end{lem}
 
 \begin{proof}
-Before we begin let us establish some identities we will use regarding roots of unity. \begin{equation}\label{eq1}
-\sum\limits_{m=0}^{p-1}\omega^{\gamma_b (m p^{N-1}+a)}=0
-\end{equation} for any $a$ and for any $\gamma_b$, which is defined so that $\omega^{\gamma_b}$ is a generator for the roots of unity. Also we need that
-\begin{equation}\label{eq2}
-\sum\limits_{m=0}^{p^{N}-1}\omega^{m(\gamma_a-\gamma_b)}=0
-\end{equation} whenever $a\neq b$.
-  Let $S$ be the block matrix
+Before we begin let us establish some useful identities  involving roots of unity. Recall that if $\omega = e^{\frac{2\pi i }{p^N}}$, $0< \gamma, \ \gamma' < p^N$ are distinct integers, both relatively prime to $p$, and $a$ is any integer,  then 
+
+\begin{equation}\label{eq:rtsofunity}
+\sum\limits_{m=0}^{p-1}\omega^{\gamma_b (m p^{N-1}+a)}=0, \text{ and } \sum\limits_{m=0}^{p^{N}-1}\omega^{m(\gamma_a-\gamma_b)}=0.
+\end{equation} 
+%\begin{equation}\label{eq2}
+%\sum\limits_{m=0}^{p^{N}-1}\omega^{m(\gamma_a-\gamma_b)}=0
+%\end{equation} whenever $a\neq b$.
+  Let $S$ be the $rp^N \times rp^{N-1}(p-1)$ block matrix written below in $r \times r$ blocks: 
  \[
 S = \left[\begin{array}{llll}
  I & I & \ldots & I \\
@@ -365,9 +653,9 @@ S = \left[\begin{array}{llll}
  \omega^{(p^N-1)\gamma_1} I & \omega^{(p^N-1)\gamma_2} I & \ldots & \omega^{(p^N-1)\gamma_\rho} I
  \end{array}\right],
 \]
-where $\omega = e^{2\pi i /p^N}$, and $\omega^{\gamma_1}, \omega^{\gamma_2}, \ldots, \omega^{\gamma_\rho}$ are  the $p^N - p^{N-1}$ generators of the cyclic group or $p^N$-roots of unity, and let $T$ be the block matrix
+where $\omega = e^{2\pi i /p^N}$, and $\omega^{\gamma_1}, \omega^{\gamma_2}, \ldots, \omega^{\gamma_\rho}$ are  the $p^N - p^{N-1}$ generators of the cyclic group or $p^N$-roots of unity. We let $T$ be the block matrix
 \[
-T = \left[\begin{array}{l | l | l}
+T = \left[\begin{array}{c | c | c}
 I_f & 0 & 0 \\\hline
  & I_{rp^{N-1}} &  \\
 0 & I_{rp^{N-1}} & S \\
@@ -375,25 +663,27 @@ I_f & 0 & 0 \\\hline
  & I_{rp^{N-1}} &  \\
 \end{array}\right].
 \]
-Now the first thing we need to show is the form of $T^{-1}$, which we can prove by demonstrating that $T^{-1}T=I$. For notational simplicity let $R=\left[\begin{array}{l l l l}I_{rp^{N-1}}& I_{rp^{N-1}}&\cdots& I_{rp^{N-1}}\end{array}\right]$. Consider the following matrix product
+%Now the first thing we need to show is the form of $T^{-1}$, which we can prove by demonstrating that $T^{-1}T=I$. 
+Let $R=\left[\begin{array}{l l l l}I_{rp^{N-1}}& I_{rp^{N-1}}&\cdots& I_{rp^{N-1}}\end{array}\right]$ and consider the product
 \[
- \left[\begin{array}{l | l  }
-I_f & 0 \\\hline
-0 & (1/p)R \\\hline
- 0 & (1/p^N)S^*   \\
+ \left[\begin{array}{cc  }
+I_f & 0 \\[1mm]
+0 & \frac{1}{p}R \\[1mm]
+ 0 & \frac{1}{p^N}S^*   \\
 \end{array}\right]
- \left[\begin{array}{l | l | l}
-I_f & 0 & 0 \\\hline
+ \left[\begin{array}{ccc}
+I_f & 0 & 0 \\
  0& R^T & S \\
 \end{array}\right]
-=\left[\begin{array}{l | l | l}
-I_f & 0 & 0 \\\hline
- 0 & I_{rp^{N-1}} & (1/p)RS \\
-0 & (1/p^N)S^*R^T & (1/p^N)S^*S \\
+=\left[\begin{array}{ccc}
+I_f & 0 & 0 \\[1mm]
+ 0 & \frac{1}{p}RR^T% I_{rp^{N-1}} 
+ & \frac{1}{p}RS \\[1mm]
+0 & \frac{1}{p^N}S^*R^T & \frac{1}{p^N}S^*S \\
 
-\end{array}\right]
+\end{array}\right].
 \]
-We can calculate each block of the matrix, starting with $RS$. For notational simplicity, we write $RS=\left[G_0 \quad G_1 \quad \cdots \quad G_{p-1}\right]$, where each $G_i$ is a $rp^{N-1}\times rp^{N-1}$ matrix.
+%We can calculate each block of the matrix, starting with $RS$. For notational simplicity, we write $RS=\left[G_0 \quad G_1 \quad \cdots \quad G_{p-1}\right]$, where each $G_i$ is a $rp^{N-1}\times rp^{N-1}$ matrix.
 %with the form
 %$$
 %G_i=\left[\begin{array}{llll}
@@ -403,56 +693,73 @@ We can calculate each block of the matrix, starting with $RS$. For notational si
 %I\sum\limits_{m=0}^{p-1}\omega^{\gamma_{1+i}(mp^{N-1}+p^{N-1}-1)}&I\sum\limits_{m=0}^{p-1}\omega^{\gamma_{2+i}(mp^{N-1}+p^{N-1}-1)}&\cdots&I\sum\limits_{m=0}^{p-1}\omega^{\gamma_{p^{N-1}+i}(mp^{N-1}+p^{N-1}-1)}
 %\end{array}\right]
 %$$
-If we think of each $G_i$ as block matrix with $r\times r$ blocks, the $ (a,b)^{th} $ block has the form $$ \left[G_i\right]_{a,b}=I_r\sum\limits_{m=0}^{p-1}\omega^{\gamma_{b+i}(mp^{N-1}+a-1)}=0 \qquad 1\leq a,b \leq p^{N-1} $$ since each matrix entry in $G_i$ contains a sum in the form of Eq. \ref{eq1}
+%If we think of each $G_i$ as block matrix with $r\times r$ blocks,
+The matrix $RS$ is comprised of $p$ $rp^{N-1} \times rp^{N-1}$ blocks, each of the form
+\[
+ %\left[G_i\right]_{a,b}=
+ I_r\sum\limits_{m=0}^{p-1}\omega^{\gamma_{b}(mp^{N-1}+a-1)}=0. %\qquad 1\leq a,b \leq p^{N-1} 
+ \]
 %Each the matrix entry in $G_i$ contains a sum in the form of Eq. \ref{eq1} thus we can conclude that $RS=\left[ 0\right]$.
-A similar calculation shows that $S^*R^T=\left[0\right]$. Next we consider $S^*S$.  By direct computation, considering $S^*S$ as a
-%$$S^*S=\left[\begin{array}{llll}
-% I & \omega^{-\gamma_1}I & \ldots & \omega^{-(p^N-1)\gamma_1}I \\
-%  I & \omega^{-\gamma_2} I & \ldots & \omega^{-(p^N-1)\gamma_2} I \\
-%  I & \omega^{-\gamma_3} I & \ldots & \omega^{-(p^N-1)\gamma_3} I \\
-%\vdots  & \vdots & & \vdots \\
-%  I &  \omega^{-\gamma_\rho}I & \ldots & \omega^{-(p^N-1)\gamma_\rho} I
-% \end{array}\right]
-%\left[\begin{array}{llll}
-% I & I & \ldots & I \\
-% \omega^{\gamma_1} I & \omega^{\gamma_2} I & \ldots & \omega^{\gamma_\rho} I \\
-% \omega^{2\gamma_1} I & \omega^{2\gamma_2} I & \ldots & ^{2\gamma_\rho} I \\
-%\vdots  & \vdots & & \vdots \\
-% \omega^{(p^N-1)\gamma_1} I & \omega^{(p^N-1)\gamma_2} I & \ldots & \omega^{(p^N-1)\gamma_\rho} I
-% \end{array}\right]
-%$$
-%$$=p^N\left[\begin{array}{llll}I&\sum\limits_{m=0}^{p^{N}-1}\omega^{m(\gamma_2-\gamma_1)}&\cdots&\sum\limits_{m=0}^{p^{N}-1}\omega^{m(\gamma_{\rho}-\gamma_1)}\\ \sum\limits_{m=0}^{p^{N}-1}\omega^{m(\gamma_1-\gamma_2)}&I&\cdots&\sum\limits_{m=0}^{p^{N}-1}\omega^{m(\gamma_{\rho}-\gamma_1)}\\\vdots&\vdots&&\vdots\\ \sum\limits_{m=0}^{p^{N}-1}\omega^{m(\gamma_1-\gamma_{\rho})}&\sum\limits_{m=0}^{p^{N}-1}\omega^{m(\gamma_2-\gamma_{\rho})}&\cdots&I\end{array}\right].
-%$$
-%  If we think of each $S^*S$ as
-block matrix with $r\times r$ blocks, we find the $ (a,b)^{th} $ block has the form $$ \left[ S^*S\right]_{a,b}=p^NI_r\sum\limits_{m=0}^{p^{N}-1}\omega^{m(\gamma_b-\gamma_a)} \qquad 1\leq a,b \leq p^N-p^{N-1} $$
-Thus $$ \left[ S^*S\right]_{a,b}=p^NI_r \quad \text{if} \ a=b$$
-$$ \left[ S^*S\right]_{a,b}=0_r \quad \text{if} \ a \neq b$$
-using Eq \ref{eq2}. Thus we see that $S^*S=p^N I$.  Putting these pieces together we have successfully shown that $T^{-1}T=I$ where $$T^{-1}=\left[\begin{array}{l | l  }
-I_f & 0 \\\hline
-0 & (1/p)R \\\hline
- 0 & (1/p^N)S^*   \\
-\end{array}\right]$$
+Similarly, $S^*R^T=0$. 
 
-Next we will explicitly decompose $M$ using $T$.
+Next we consider $S^*S$ as a block matrix with $r\times r$ blocks, the $ (a,b)^{th} $ block has the form 
+\[
+%\left[ S^*S\right]_{a,b}=p^N
+I_r\sum\limits_{m=0}^{p^{N}-1}\omega^{m(\gamma_b-\gamma_a)} %\qquad 1\leq a,b \leq p^N-p^{N-1}.
+=\left\{\begin{array}{cl}
+p^NI_r & \text{if} \ a=b\\
+0_r & \text{if} \ a \neq b
+\end{array}\right.
+\]
+So, $S^*S=p^N I$, and therefore 
+\[
+T^{-1}= \left[\begin{array}{cc  }
+I_f & 0 \\[1mm]
+0 & \frac{1}{p}R \\[1mm]
+ 0 & \frac{1}{p^N}S^*   \\
+\end{array}\right].
+\]
 
-Let $M$ be the matrix in the statement of this Lemma.  Then with $P = \left[ H \quad H \cdots H\right]$ and
+Next we show that performing a similarity transformation using $T$ gives the equitable decomposition in Equation \ref{eq:sim_decomp}.
+Let $M$ be the matrix given in Equation \ref{eq:defineM}.  Then with $P = \left[ H \quad H \cdots H\right]$ and
 $Q = [ L^T \quad L^T \cdots L^T]^T$,
-\begin{align}
-T^{-1}MT &= \left[\begin{array}{l | l  }
-I_f & 0 \\\hline
-0 & (1/p)R \\\hline
- 0 & (1/p^N)S^*   \\
+\[
+T^{-1}MT = \left[\begin{array}{cc  }
+I_f & 0 \\[1mm]
+0 & \frac{1}{p}R \\[1mm]
+ 0 & \frac{1}{p^N}S^*   \\
 \end{array}\right]
 \left[\begin{array}{rr} F & P \\ Q & C \end{array}\right]
- \left[\begin{array}{l | l | l}
-I_f & 0 & 0 \\\hline
+ \left[\begin{array}{ccc}
+I_f & 0 & 0 \\
  0& R^T & S \\
-\end{array}\right] \nonumber \\
-&=\left[\begin{array}{rrr} I_f & PR^T & PS \\(1/p)RQ  & (1/p)RCR^T & (1/p)RCS\\ (1/p^N)S^*Q & (1/p^N) S^*CR^T & (1/p^N)S^*CS \end{array}\right].\label{blocks}
-\end{align}
-We can see from the form of the matrices that $$PR^T=pH, \quad RQ=pL, \quad \text{and} \quad RCR^T=p\sum_{m=0}^{p-1}{D_m}=pB_0.$$
-Because $S$ has an $r\times r$ block form, we break $H$ as $$H=\left[ H_0 \quad H_1 \quad \cdots \quad H_{p^{N-1}-1}\right],$$ where each $H_i$ is $f\times r$.  Now $$PS=\left[ \sum_{i=0}^{p^{N-1}-1}H_i\sum_{m=0}^{p-1}\omega^{\gamma_1 (mp^{N-1}+i)} \quad \sum_{i=1}^{p^{N-1}}H_i\sum_{m=0}^{p-1}\omega^{\gamma_2 (mp^{N-1}+i)} \  \cdots \ \sum_{i=1}^{p^{N-1}}H_i\sum_{m=0}^{p-1}\omega^{\gamma_\rho (mp^{N-1}+i)}\right]$$
-We find the sum in Eq. \ref{eq1} in every entry. Thus we conclude that $PS=0$ and a similar calculation shows that $S^*Q=0$. Next we consider the matrix product $RCS$.
+\end{array}\right] 
+=\left[\begin{array}{ccc} 
+F & PR^T & PS \\[1mm]
+\frac{1}{p}RQ  & \frac{1}{p}RCR^T & \frac{1}{p}RCS\\[1mm]
+ \frac{1}{p^N}S^*Q & \frac{1}{p^N} S^*CR^T & \frac{1}{p^N}S^*CS \end{array}\right].\label{blocks}
+\]
+%\begin{align}
+%T^{-1}MT &= \left[\begin{array}{l | l  }
+%I_f & 0 \\\hline
+%0 & (1/p)R \\\hline
+% 0 & (1/p^N)S^*   \\
+%\end{array}\right]
+%\left[\begin{array}{rr} F & P \\ Q & C \end{array}\right]
+% \left[\begin{array}{l | l | l}
+%I_f & 0 & 0 \\\hline
+% 0& R^T & S \\
+%\end{array}\right] \nonumber \\
+%&=\left[\begin{array}{rrr} I_f & PR^T & PS \\(1/p)RQ  & (1/p)RCR^T & (1/p)RCS\\ (1/p^N)S^*Q & (1/p^N) S^*CR^T & (1/p^N)S^*CS \end{array}\right].\label{blocks}
+%\end{align}
+It is straightforward to verify that 
+\[
+PR^T=pH, \quad RQ=pL, \quad \text{and} \quad RCR^T=p\sum_{m=0}^{p-1}{D_m}=pB_0.
+\]
+To show that $PS = 0$, we break $H$ into $f \times r$ blocks $H_i$ and observe that $H_I = H_{i + p^{N-2}}$. The $k$th $f \times r$ block in the product $PS$ is given by 
+\[ \sum_{i=0}^{p^{N-1}-1}H_i\sum_{m=0}^{p-1}\omega^{\gamma_k (mp^{N-1}+i)} =0,
+\]
+as in Equation \ref{eq:rtsofunity}. A similar calculation shows that $S^*Q=0$. Next we consider the matrix product $RCS$.
 %$$RCS=R\left[\begin{array}{lllll}
 % C_0 & C_1 & C_2 & \cdots & C_{p^N-1} \\
 % C_{p^N-1} & C_0 & C_1 & \cdots & C_{p^N-2} \\
@@ -485,8 +792,13 @@ We find the sum in Eq. \ref{eq1} in every entry. Thus we conclude that $PS=0$ an
 %    \vdots  &  \ddots  &  \vdots   \\
  %  {\sum\limits_{m = 0}^{{p^N} - 1} {C_m}{\omega^{(m+p^N-1)\gamma_1}\sum\limits_{j=0}^{p-1}{\omega ^{\gamma _1(jp^{N-1})}}} }  &  \cdots  &  {\sum\limits_{m = 0}^{{p^N} - 1} {C_m}{\omega^{(m+p^N-1)\gamma_{\rho}}\sum\limits_{j=0}^{p-1}{\omega ^{\gamma _{\rho}(jp^{N-1})}}} }  \\
 % \end{array} } \right]$$
-Again we write $RCS$ as block matrix with $r\times r$ blocks. A direct calculation shows that the $ (a,b)^{th} $ block has the form $$ \left[RCS \right]_{a,b}= {\sum\limits_{m = 0}^{{p^N} - 1} {C_m}{\omega^{(m+a-1)\gamma_b}\sum\limits_{j=0}^{p-1}{\omega ^{\gamma _b(jp^{N-1})}}} } \qquad 1\leq a \leq p^N, 1\leq b \leq p^N-p^{N-1}\  $$
-Every entry contains the sum in Eq. \ref{eq1} (with $a=0$). Thus $RCS=\left[0\right]$ and in a similar way we can show that $S^*CR^T=\left[0\right]$. Finally we calculate $S^*CS$.
+The $ (a,b)^{th} $ block has the form 
+\[
+% \left[RCS \right]_{a,b}=
+ {\sum\limits_{m = 0}^{{p^N} - 1} {C_m}{\omega^{(m+a-1)\gamma_b}\sum\limits_{j=0}^{p-1}{\omega ^{\gamma _b(jp^{N-1})}}} } = 0 
+ % \qquad 1\leq a \leq p^N, 1\leq b \leq p^N-p^{N-1}\  $$
+ \]
+using Equation \ref{eq:rtsofunity} (with $a=0$). Thus $RCS=0$ and similarly $S^*CR^T=0$. Finally we calculate $S^*CS$.
 %\[
 %S^*CS = \left( {\begin{matrix}
 %   {\sum\limits_{n = 0}^{{p^N} - 1} {\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{(m + n){\gamma _1}}}{\omega ^{ - n{\gamma _1}}}} } } & {\sum\limits_{n = 0}^{{p^N} - 1} {\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{(m + n){\gamma _1}}}{\omega ^{ - n{\gamma _2}}}} } } &  \cdots  & {\sum\limits_{n = 0}^{{p^N} - 1} {\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{(m + n){\gamma _1}}}{\omega ^{ - n{\gamma _\rho }}}} } }  \\
@@ -503,35 +815,48 @@ Every entry contains the sum in Eq. \ref{eq1} (with $a=0$). Thus $RCS=\left[0\ri
 %   {\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _\rho }}}\sum\limits_{n = 0}^{{p^N} - 1} {{\omega ^{n({\gamma _\rho } - {\gamma _1})}}} } } & {\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _{\rho}}}}\sum\limits_{n = 0}^{{p^N} - 1} {{\omega ^{n({\gamma _\rho } - {\gamma _2})}}} } } &  \cdots  & {{p^N}\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _\rho }}}} }  \\
 % \end{matrix} } \right)
 %\]
-The form of the $ (a,b)^{th} $ $r\times r$ block of $ S^*CS$ is given by $$ \left[S^*CS \right]_{a,b}=  {\sum\limits_{n = 0}^{{p^N} - 1} {\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{(m + n){\gamma _a}}}{\omega ^{ - n{\gamma _b}}}} } } \qquad 1\leq a, b \leq p^N-p^{N-1}\  $$
-If $a=b$ $$  \left[S^*CS \right]_{a,b}={{p^N}\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _a}}}} }=p^NB_a$$
-If $a\neq b$ $$  \left[S^*CS \right]_{a,b}= {\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _1}}}\sum\limits_{n = 0}^{{p^N} - 1} {{\omega ^{n({\gamma _1} - {\gamma _2})}}} } }=0$$
-Using Eq. \ref{eq2} for entries where $a\neq b$, thus leaving
-$${S^*}CS =
+The $ (a,b)^{th} $ $r\times r$ block of $ S^*CS$ is given by 
+\[
+% \left[S^*CS \right]_{a,b}= 
+ {\sum\limits_{n = 0}^{{p^N} - 1} {\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{(m + n){\gamma _a}}}{\omega ^{ - n{\gamma _b}}}} } } %\qquad 1\leq a, b \leq p^N-p^{N-1}\  
+ =\left\{ \begin{array}{cl}
+ {{p^N}\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _a}}}} }=p^NB_a& \text{ if }a=  b\\
+ {\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _1}}}\sum\limits_{n = 0}^{{p^N} - 1} {{\omega ^{n({\gamma _1} - {\gamma _2})}}} } }=0 & \text{ if } a \neq b. 
+ \end{array} \right.
+ \]
+%If $a=b$ $$  \left[S^*CS \right]_{a,b}={{p^N}\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _a}}}} }=p^NB_a$$
+%If $a\neq b$ $$  \left[S^*CS \right]_{a,b}= {\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _1}}}\sum\limits_{n = 0}^{{p^N} - 1} {{\omega ^{n({\gamma _1} - {\gamma _2})}}} } }=0$$
+Using Equeation \ref{eq:rtsofunity} for entries where $a\neq b$. Thus, 
+\[
+{S^*}CS = B_1 \oplus B_2 \oplus \oplus \ldots \oplus B_{p^N-p^{N-1}}.
 %\left[ {\begin{matrix}
 %   p^N{\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _1}}}} } & {0} &  \cdots  & {0}  \\
 %   {0} & p^N{\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _2}}}} } &  \cdots  & {0}  \\
 %    \vdots  &  \vdots  &  \ddots  &  \vdots   \\
 %   {0} & {0} &  \cdots  & p^N{\sum\limits_{m = 0}^{{p^N} - 1} {{C_m}{\omega ^{m{\gamma _{({p^N} - p^{N-1})}}}}} }  \\
 % \end{matrix} } \right]=
- p^N \left[ {\begin{matrix}
-  B_1 & {0} &  \cdots  & {0}  \\
-   {0} & B_2  &  \cdots  & {0}  \\
-    \vdots  &  \vdots  &  \ddots  &  \vdots   \\
-   {0} & {0} &  \cdots  & B_{\rho}   \\
- \end{matrix} } \right]
- $$
-Now after putting each of these pieces into Eq \ref{blocks}, we find
+% p^N \left[ {\begin{matrix}
+%  B_1 & {0} &  \cdots  & {0}  \\
+%   {0} & B_2  &  \cdots  & {0}  \\
+%    \vdots  &  \vdots  &  \ddots  &  \vdots   \\
+%   {0} & {0} &  \cdots  & B_{\rho}   \\
+% \end{matrix} } \right]
+\]
+Finally, we have
 \[
-T^{-1}MT = \left[\begin{array}{rrrrrrr}
-I_f & kH & 0 & 0 & \cdots & \cdots & 0 \\
-L & B_0 & 0 & 0 & \cdots & \cdots & 0 \\
-0 & 0 & B_1 & 0 & \cdots & \cdots & 0 \\
-0 & 0 & 0 & B_2  & 0  & \cdots & 0 \\
-\vdots & \vdots & \vdots & 0 & \ddots & \ddots & \vdots \\
-\vdots & \vdots & \vdots & \vdots & \ddots & \ddots & \vdots \\
-0 & 0 & 0 &0  & \cdots  & 0 &B_{p^N-p^{N-1}} \\
-\end{array}\right],
+T^{-1}MT =
+\left[\begin{array}{cc}
+F & kH \\L & B_0
+\end{array}\right] \oplus B_1\oplus B_2 \oplus \oplus \ldots \oplus B_{p^N-p^{N-1}}
+% \left[\begin{array}{rrrrrrr}
+%I_f & kH & 0 & 0 & \cdots & \cdots & 0 \\
+%L & B_0 & 0 & 0 & \cdots & \cdots & 0 \\
+%0 & 0 & B_1 & 0 & \cdots & \cdots & 0 \\
+%0 & 0 & 0 & B_2  & 0  & \cdots & 0 \\
+%\vdots & \vdots & \vdots & 0 & \ddots & \ddots & \vdots \\
+%\vdots & \vdots & \vdots & \vdots & \ddots & \ddots & \vdots \\
+%0 & 0 & 0 &0  & \cdots  & 0 &B_{p^N-p^{N-1}} \\
+%\end{array}\right],
 \]
 and the result follows.
 
@@ -559,8 +884,8 @@ and the result follows.
 %and the result follows.
 \end{proof}
 
-\marginpar{ do we need to define $\cT_m$ and $M( \cT_0, \cT_m )$?}
-\begin{prop}\label{prop:primepower}[Decomposition for Automorphisms of Prime-Powered Order ]
+\marginpar{ do we need to define $\cT_m$ and $M( \cT_0, \cT_m )$?Yes, }
+\begin{prop}[Decomposition for Automorphisms of Prime-Powered Order]\label{prop:primepower}
 Let $G$ be a graph with automorphism $\phi$ of order $p^N$ for some prime $p$ and integer $N>0$. Let $\cT_0$ be a transversal of the orbits of length $p^N$ in $\phi$, and let $\tcT_0 = \bigcup_{m = 0}^{p^{N-1}-1} \cT_m$, which is a transversal of orbits of $\phi^p$ on these same orbits.  Let $\cT_F$ contain all vertices in orbits of length less than $p^N$, let $f = |\cT_F|$, and let $M$ be an automorphism compatible matrix on $G$. Set $F = M[\cT_F, \cT_F]$, $H = M[\cT_F, \tcT_0]$, $L = [\tcT_0,\cT_F]$, $C_m = M[\cT_0, \cT_m]$, and $D_s = M[\tcT_0, \tcT_s]$.  Then $M$  is a block matrix of the form required in Lemma \ref{lem:Dallas} with $F$, $H$, $L$, $C_i$, $D_j$ as described.
 
 \end{prop}
@@ -1059,7 +1384,7 @@ If $i < h$, then set $i = i+1$ and return to \emph{Step a}.  Otherwise, the deco
 
 \noindent The procedure described in Steps $a$--$c$ allows one to sequentially decompose a matrix $M$ over any of its automorphisms. By extension we refer to the resulting matrix as an \emph{equitable decomposition} of $M$ over $\phi$. The following example illustrates an equitable decomposition over an automorphism that is neither basic nor separable.
 
-\begin{example}
+\begin{example}\label{ex:18}
 Consider the following graph and associated adjacency matrix $M$.\\
 \begin{center}
 \includegraphics[scale=.5]{ex2_0.pdf}
@@ -1119,7 +1444,7 @@ $\phi_{1}=\phi_0^{(1-A\ell_{1})}$, where $A=-1$, since $1=(-1)\ell_{1}+(1)p_0^{N
 Round 2\\
 \emph{Step a}: Now $\ell_2=1$, thus $\psi_1=\phi_1^1$\\
 
-\noindent \emph{Step b}: On this step we only need to run through the above algorithm once since the order of our automorphism is $3^1$.  During this step we do not need to be worried about how we choose the transversal for the decomposition because this is the final step and the transversal only need to be carefully chosen to guarantee that the resulting decomposed graph contains a symmetry for the next round. Thus after running through the algorithm 1 on $M(1)$ and with automorphism $\psi_1$ we get $M(2)$ with the following adjacency graph
+\noindent \emph{Step b}: On this step we only need to run through the above algorithm once since the order of our automorphism is $3^1$.  During this step we do not need to be worried about how we choose the transversal for the decomposition because this is the final step and the transversal only need to be carefully chosen to guarantee that the resulting decomposed graph contains a symmetry for the next round. Thus after running through the algorithm 1 on $M(1)$ and with automorphism $\psi_1$ we get $M(2)$ with the following adjacency graph.
 
 \begin{center}
 \includegraphics[scale=.5]{ex2_3.pdf}
@@ -1143,7 +1468,131 @@ Round 2\\
 
 \end{example}
 \section{Extensions and Applications}
-\afcomm{Here is where we will talk about eigenvectors, spectral radius, and Gershgorin regions. }
+As in [paper 2], we describe the form of the eigenvectors for a matrix $M$ given the eigenvectors of the smaller $B_i$ matrices which are a result of the decomposition over an automorphism of size $p^N$.  We can explicitly write down a form for the eigenvectors for a single step in the decomposition.  Starting with the eigenvectors of the final blocks, we can work backwards, each time find the eigenvectors of the previous matrix in the sequence of decompositions.
+For a single step we have eigenvectors with essentially the same form that we had in [paper 2].
+
+\begin{theorem}
+Let $M$ be an $n\times n$ automorphism compatible matrix of the graph $G$. For $\phi$ an automorphism of $G$ with order $p^N$ and let $\tilde{M} \oplus B_1\oplus \cdots \oplus B_{p^N-p^{N-1}}$ be a single decomposition of $M$ as described in Proposition???. Suppose $\{\mathbf{u}_{m,\ell}:1\leq \ell \leq r\}$ \textcolor{red}{($n=f+rp^N$)}  is a (generalized) eigenbasis for $B_m$  for $1\leq m\leq p^N-p^{N-1}$ and $\{{{\mathbf{u}}_{0,i}}:1\leq i\leq f+rp^{N-1}\}$ is a (generalized) eigenbasis for $\tilde{M}$ and where each ${\mathbf{u}}_{0,i}= {{\mathbf{w}}_i} \oplus {{\mathbf{v}}_i}$ with ${{\mathbf{w}}_i}\in\mathbb{C}^f\text{ and }{{\mathbf{v}}_i}\in\mathbb{C}^{rp^{N-1}}$. Then a (generalized) eigenbasis of $M$ is the set
+\begin{equation}\label{eq:vect}
+\left\{{{\bf{0}}_f}\, \oplus {\left[ {\mathop  \bigoplus \limits_{j = 0}^{p^N-1} {\omega ^{j \gamma_m}}{{\bf{u}}_{m,\ell}}} \right] ,{{\bf{w}}_i}\,\oplus \left[   {\mathop  \bigoplus \limits_{j = 0}^{p - 1} {{\bf{v}}_i}} \right]\,:1 \leq m \leq p^N-p^{N-1}, 1 \leq \ell \leq r,1 \leq i \leq f + rp^{N-1},\omega=e^{2\pi i/k}\,} \right\}.
+\end{equation}
+
+Moreover, if $\mathbf{x}_{m,l}={{\bf{0}}_f}\oplus \left[ {\mathop  \bigoplus \limits_{j = 0}^{p^N - 1} {\omega ^{j\gamma_m}}{{\bf{u}}_{m,l}}} \right]$ and ${{\bf{x}}_{0,i}} =  {{\bf{w}}_i} \oplus \left[{\mathop  \bigoplus \limits_{j = 0}^{p - 1} {{\bf{v}}_i}} \right]$ then the following hold.\\
+(i) If $\lambda_{m,\ell}$ is the $\ell^{th}$ eigenvalue of $B_m$ then $\lambda_{m,\ell}\in\sigma(M)$ corresponds to the (generalized) eigenvector $\mathbf{x}_{m,l}$.\\
+(ii) If $\lambda_{0,i}$ is an eigenvalue of $M_\phi$ then $\lambda_{0,i}\in\sigma(M)$ corresponds to the (generalized) eigenvector ${{\bf{x}}_{0,i}}$.
+\end{theorem}
+The proof of the above theorem exactly follows the proof of Theorem 4.1 in \ref{}[paper 2], essentially showing that if $\mathbf{v}$ is an eigenvector of $T^{-1}MT$, then $T\mathbf{v}$ is an eigenvector of $M$. Thus this form described for eigenvectors in the above theorem comes straight from doing this computation.
+
+\begin{example}
+Consider the first decomposition performed example \ref{}, we found that $$M(0)(1)=\tilde{M}\oplus B_1\oplus B_2\text{ where } \tilde{M}=\left[\begin{matrix}
+F & 2H \\
+H^T & B_0 \end{matrix}\right]$$ with$$F=\left[
+\begin{matrix}
+0 & 1 & 0 & 0 & 0 & 1\\
+1 & 0 & 1 & 0 & 0 & 0\\
+0 & 1 & 0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 & 1 & 0\\
+0 & 0 & 0 & 1 & 0 & 1\\
+1 & 1 & 0 & 0 & 1 & 0\\
+\end{matrix}\right] \text{, }H=\left[\begin{matrix}
+0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 1\\
+0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0\\
+0 & 0 & 1 & 0 & 0 & 0\\
+1 & 0 & 0 & 0 & 0 & 0\\
+\end{matrix}\right] \text{, }B_0=\left[\begin{matrix}
+0 & 0 & 0 & 0 & 1 & 1\\
+0 & 0 & 0 & 1 & 0 & 1\\
+0 & 0 & 0 & 1 & 1 & 0\\
+0 & 1 & 1 & 0 & 0 & 0\\
+1 & 0 & 1 & 0 & 0 & 0\\
+1 & 1 & 0 & 0 & 0 & 0\end{matrix}\right]$$ and $$
+B_1=-B_2=\left[\begin{matrix} 0 & -i & i \\ i& 0 & -i \\ -i &i & 0 \end{matrix}\right]\\
+\text{ and }$$
+
+After finding the eigenvectors of $\tilde{M},\ B_1$ and $B_2$ we can immediately write down eigenvectors for the original matrix $M$. For example $$\mathbf{u}_{0,1}=(2,\ -2,\ 2,\ -2,\ 2,\ -2,\ \sqrt{2},\ \sqrt{2},\ \sqrt{2},\ -\sqrt{2},\ -\sqrt{2},\ -\sqrt{2})^T $$ is an eigenvector of $\left[\begin{matrix}
+F & 2H \\
+H^T & B_0 \end{matrix}\right]$, so $$\mathbf{w_1}=(2, -2,\ 2, -2,\ 2, -2)^T$$ $$\mathbf{v_1}=(\sqrt{2},\ \sqrt{2},\ \sqrt{2}, -\sqrt{2}, -\sqrt{2}, -\sqrt{2})^T.$$  Thus $M$ must have an eigenvector of the form
+\begin{multline*}\mathbf{x}_{0,1}=\mathbf{w}_1\oplus\mathbf{v}_1\oplus\mathbf{v}_1\\
+=(2, -2,\ 2, -2,\ 2,\ -2, \sqrt{2}, \sqrt{2}, \sqrt{2}, -\sqrt{2}, -\sqrt{2}, -\sqrt{2},\sqrt{2}, \sqrt{2}, \sqrt{2}, -\sqrt{2}, -\sqrt{2}, -\sqrt{2})^T.\end{multline*}  We can also find 11 other eigenvector in this way using the other 11 eigenvectors of $\tilde{M}$. In addition, $\mathbf{u}_{1,1}=(1,\ 1,\ 1)^T$ is an eigenvector of  $B_1$, then another eigenvector of $M$ is \begin{align*}
+\mathbf{x}_{1,1}=&\mathbf{0}_6\oplus\mathbf{u}_{1,1}\oplus\omega\mathbf{u}_{1,1}\oplus\omega^2\mathbf{u}_{1,1}\oplus\omega^3\mathbf{u}_{1,1}\\
+=&(0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 1,\ 1,\ 1,\ i,\ i,\ i,\ -1,\ -1,\ -1,\ -i,\ -i,\ -i)
+\end{align*}.  We can find 5 more eigenvector with this form using the other two eigenvectors of $B_1$ and the three eigenvectors of $B_2$. Thus we can find the complete set of eigenvectors which form the eigenbasis for $M$.
+
+We also note here that had we started with the next step we could have used the eigenvectors of the components of $M(0)(2)$ to to come up with the eigenvectors of $M(0)(1)$ which we used in this example to find the eigenvectors of $M$, and so on.
+\end{example}
+
+Another result that can be generalized from \ref{} [paper 2], is that the spectral radius of a nonnegative matrix $M$ is the same as the spectral radius of the divisor matrix $M_\phi$ for any automorphism $\phi$.  A weaker version of this proposition was was proved for the case of $\phi$ a basic or separable automorphism in Proposition 4.3 of \ref{}[paper 2].
+
+\begin{prop}\label{lem:3}\textbf{(Spectral Radius of Equitable Partitions)}
+Let $\phi$ be any automorphism of a graph $G$ with $M$ an automorphism compatible matrix. If $M$ is nonnegative and irreducible, then its spectral radius, $\rho(M)$, is the largest eigenvalue of $M_{\phi}$.
+\end{prop}
+
+\begin{proof}
+  If we can prove that the result holds using the decomposition techniques demonstrated in Lemma \ref{lem:Dallas}, the first step of the case where $\phi$ has order $p^N$, then the general results.  This is because completely decomposing a matrix over a more complex automorphism is done in a sequence of decompositions and if we show the divisor matrix and the end of each step has the desired properties, then induction proves our result.
+
+Thus we assume that $M$ is an irreducible, nonnegative matrix with automorphism $\phi$, where the order of $\phi$ is $p^N$.  We know there is a permutation from \ref{} which will put $M$ into ``double block circulant form" given in Lemma \ref{lem:Dallas}. Using the same notation as in this Lemma, let $\tilde{M}=\left[\begin{array}{rr} F & kH \\ L & B_0 \end{array}\right]$. we need to show that $\rho(\tilde{M})=\rho(M)$.
+Lemma \ref{lem:Dallas } describe a matrix $T$ so that \[
+T^{-1} M T = \tilde{M}
+\oplus B_1 \oplus B_2 \oplus \cdots \oplus B_{p^N-p^{N-1}},
+\].
+We first claim that $\rho(\tilde{M})\geq\rho(B_j)$ for $1\leq j\leq p^{N}-p^{N-1}.$
+
+To verify this claim, we first need Corollary 8.1.20 in \cite{Horn85} which states that if $N$ is a principal submatrix of $M$ then $\rho(N)\leq\rho(M)$ if $M$ is nonnegative. We see that $B_0$ is a principal submatrix of $\tilde{M}$.  Since $M$ is nonnegative, and $B_0=\sum_{m=0}^{p-1}D_m$, we know $\tilde{M}$ is nonnegative, and  we can conclude that $\rho(B_0)\leq\rho(\tilde{M})$.
+
+Next we must show that $\rho(B_j)\leq\rho(B_0)$ for $1\leq j \leq p^N-p^{N-1}$. For a matrix $P\in\mathbb{C}^{n\times n}$, let $|P|\in\mathbb{R}_{\geq 0}^{n\times n}$ denote the matrix with entries $|P|_{ij}=|P_{ij}|$, i.e. $|P|$ is the entrywise absolute value of $P$. Moreover, if $P,Q\in\mathbb{R}^{n\times n}$ let $P\leq Q$ if $P_{ij}\leq Q_{ij}$ for all $1\leq i,j\leq n$. Theorem 8.1.18 in \cite{Horn85}, states that if $|P|\leq Q$  then $\rho(P)\leq\rho(Q)$. Because
+$$\left| {{B_j}} \right| = \left| {\sum\limits_{m = 0}^{p^N - 1} {{{\left( {{\omega ^{m\gamma_j}}} \right)}}{C_m}} } \right| \leq \sum\limits_{m = 0}^{p^N - 1} {\left| {\left( {{\omega ^{m\gamma_j}}} \right){C_m}} \right|}  = \sum\limits_{m = 0}^{p^N - 1} {{C_m}} $$ and we can conclude that $$\rho(B_j)\leq\rho\left(\sum_{m=1}^{p^N-1}C_m\right)$$ for all $1\leq j\leq p^N-p^{N-1}$. We now note that $$B_0=\sum_{i=0}^{p-1}D_i=
+\left[\begin{matrix}
+\sum_{t=0}^{p-1}C_{tp^{N-1}} & \sum_{t=0}^{p-1}C_{tp^{N-1}+1} & \dots & \sum_{t=0}^{p-1}C_{tp^{N-1}+p^N-1}\\
+\sum_{t=0}^{p-1}C_{tp^{N-1}+p^N-1} & \sum_{t=0}^{p-1}C_{tp^{N-1}} & \dots & \sum_{t=0}^{p-1}C_{tp^{N-1}+p^N-2}\\
+\vdots & \vdots & \ddots & \vdots\\
+\sum_{t=0}^{p-1}C_{tp^{N-1}+1} & \sum_{t=0}^{p-1}C_{tp^{N-1}+2} & \dots & \sum_{t=0}^{p-1}C_{tp^{N-1}}\\
+\end{matrix}\right]$$ which has block circulant form.  Now we apply Lemma \ref{lem:bc}, which shows that $\rho(B_0)=\rho\left(\sum C_m\right)$. Therefore,
+\begin{equation}\label{eq:rho}
+\rho(B_j)\leq\rho(B_0)\leq\rho(\tilde{M}) \ \text{for all} \ 1\leq j\leq p^N-p^{N-1}.
+\end{equation}
+which verifies our claim.  Using this claim and the fact that $\sigma(M)=\sigma(\tilde{M})\cup\sigma(B_1)\cup\dots\cup\sigma(B_{p^N-p^{N-1}})$ we can immediately conclude that $\rho(M)=\rho(\tilde{M})$.  To complete the proof we must show that $\tilde(M)$ is irreducible.  This can be demonstrated by verifying that if $M$ is irreducible, then $\tilde{M}$ must also be irreducible. This is shown in the proposition 4.3 in \ref{}[paper 2]). The Perron-Frobenius Theorem guarantees that the spectral radius of an irreducible matrix is one of its eigenvalues. Applying this theorem to $\tilde{M}$ guarantees that the spectral radius is in fact the largest eigenvalue of $\tilde{M}$, thus $\rho(M)$ must be the largest eigenvalue of $\tilde{M}$.
+
+This completes the proof of the first step of the decomposition.  We can then repeat the argument for all $N$ steps of this algorithm and conclude that the $\rho(M)$ is the largest eigenvalue of the divisor matrix $M_\phi$.  If $\phi$ is has order $p_0^{N_0}\cdot p_1^{N_1}\cdot\dots\cdot p_k^{N_k}$, then Proposition\ref{prop:dd} shows we can decompose the Matrix using a sequence of automorphisms each of order $p_r^{N_r}$ that induce a sequence of equitable decompositions on $M$. By induction each subsequent decomposition results in a nonnegative divisor matrix $(\dots(M_{\psi_0})_{\psi_1}\dots)_{\psi_i}$ for $i\leq h$ with the same spectral radius $r=\rho(M)$ implying that $\rho(M)$ must be the largest eigenvalue for $M_\phi$ for any $\phi\in Aut(G).$
+\end{proof}
+
+
+\begin{lem}\label{lem:bc}
+If irreducible, non-negative matrix $M$ is has block circulant form
+$$M=\left[\begin{matrix}
+A_1 & A_2 & A_3 & \dots & A_n \\
+A_n & A_1 & A_2 & \dots & A_{n-1}\\
+A_{n-1} & A_n & A_1 & \dots & A_{n-2}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+A_2 & A_3 & A_4 & \dots & A_1\end{matrix}\right]\text{,  and   } N=\sum_{m=1}^n A_m$$ then $$\rho(M)=\rho(N).$$
+\end{lem}
+\begin{proof}
+Because M is non-negative and irreducible, we know that $N$ is also non-negative and irreducible (prove this?).  Thus the Perron-Frobenius Theorem guarantees that the spectral radius of N, $\rho(N)$, is a positive eigenvalue of $N$.  It also guarantees that its associated eigenvector $\mathbf{v}$ can be chosen to have all positive entries.  Now consider the vector $\mathbf{w}=\mathbf{v}\oplus\mathbf{v}\oplus\dots \oplus\mathbf{v}$ (a total of $m$ $\mathbf{v}$'s).  We can see that $\mathbf{w}$ is an eigenvector of $M$ since $$M\mathbf{w}=\left[\begin{matrix}
+A_1 & A_2 & A_3 & \dots & A_n \\
+A_n & A_1 & A_2 & \dots & A_{n-1}\\
+A_{n-1} & A_n & A_1 & \dots & A_{n-2}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+A_2 & A_3 & A_4 & \dots & A_1\end{matrix}\right]\left[\begin{matrix} \mathbf{v} \\ \mathbf{v}\\ \mathbf{v}\\ \vdots \\ \mathbf{v}\end{matrix}\right]=\left[\begin{matrix} \sum A_m \mathbf{v} \\\sum A_m  \mathbf{v}\\ \sum A_m \mathbf{v}\\ \vdots \\ \sum A_m \mathbf{v}\end{matrix}\right]=\left[\begin{matrix} \rho(N) \mathbf{v} \\\rho(N)  \mathbf{v}\\\rho(N) \mathbf{v}\\ \vdots \\ \rho(N) \mathbf{v}\end{matrix}\right]=\rho(N) \mathbf{w}$$.  Thus $\mathbf{w}$ is an eigenvector of $M$ with only positive entires and with eigenvalue $\rho(N)$.  Because $M$ is irreducible and non-negative, the Perron-Frobenius Theorem tell us the the only eigenvector of $M$ that is all positive must correspond the the largest eigenvalue, which is the spectral radius.  Therefore we conclude that $\rho(N)=\rho(M)$.
+\end{proof}
+ \begin{example}
+ Returning to Example \ref{ex:18}, can calculate the eigenvalues for the original adjacency matrix are $$\sigma(M)=\{ -2 - \sqrt{2}, 2 + \sqrt{2}, -1 - \sqrt{2}, -1 - \sqrt{2}, 1 + \sqrt{2}, 1
++ \sqrt{2}, -\sqrt{3}, -\sqrt{3}, \sqrt{3}, \sqrt{3}, -2 + \sqrt{2}, 2 - \
+\sqrt{2}, 1 - \sqrt{2}, 1 - \sqrt{2}, -1 + \sqrt{2}, -1 + \sqrt{2}, 0, 0 \}$$
+and also $$\sigma(M_\phi)=\{2 + \sqrt{2}, 2 - \sqrt{2}\}.$$
+Thus we can see that $\rho(M)=\rho(M_\phi)=2 + \sqrt{2}$.
+ \end{example}
+% Now we assume that $M$ is both nonnegative and irreducible. The Perron-Frobenius Theorem implies that $r=\rho(M)$ is a simple eigenvalue of $M$.
+
+% Next we claim that if $M$ is irreducible, then $M_\phi$ is also irreducible. Let $M$ be an $n\times n$ nonnegative matrix with an associated basic automorphism $\phi$ with order $k$, and let $M_\ell$ be the submatrix of $M$ associated with the $\ell^{th}$ power of the semitransversal in an equitable decomposition of $M$ over $\phi$. Recall that a matrix is reducible if and only if its associated weighted digraph is \emph{strongly connected}, meaning for any two vertices in the graph there is a directed path between them.  Suppose $G$ is the strongly connected graph with weighted adjacency matrix $M$.  Also we suppose that $G_\phi$ is the graph whose weighted adjacency matrix is $M_\phi$ and let $a$ and $b$ be vertices of $G_\phi$. Note that every vertex fixed by $\phi$ in $G$ directly corresponds to a vertex in $G_\phi$, and all other vertices correspond to a collection of $k$ vertices in $G$, (cf. Section \ref{sec:6}).  Choose $a'$ and $b'$ in $G$ to be any vertices corresponding to $a$ and $b$, respectively. Now because $G$ is strongly connected it contains a path $a'=v_0', v_1', v_2',\dots, b'=v_m'$ from $a'$ to $b'$.  Consider the sequence of vertices $a=v_0, v_1, v_2 ,\dots, b=v_m$ where $v_i$ is the unique vertex in $G_\phi$ corresponding $v_i'$ in $G$. To prove this is a path we must show each of the entries in matrix $M_\phi$ corresponding to the edges $v_i\rightarrow v_{i+1}$ are positive. If $v_i'$ or $v_{i+1}'$ are fixed by $\phi$ then the entry in $M$ corresponding to the $v_i'\rightarrow v_{i+1}'$ edge is either equal to the entry in $M_\phi$ corresponding to the $v_i\rightarrow v_{i+1}$ edge, or is a positive multiple thereof. If $v_i'$ and $v_{i+1}'$ are not fixed by $\phi$, then suppose the $v_i'\rightarrow v_{i+1}'$ edge corresponds to $M_\ell(r,s)$ for some $\ell$ and for some indices $r$ and $s$. By hypothesis, $M_\ell(r,s)>0$. The $v_i\rightarrow v_{i+1}$ edge corresponds to $B_0(r,s)$, and  $B_0=\sum_\ell{M_\ell}$, {where each $M_\ell(r,s)$ is nonnegative}. Therefore this entry must also be positive in $M_\phi$.  Thus we can conclude that $G_\phi$ is strongly connected and therefore $M_\phi$ is irreducible.
+
+
+%Next we claim that if $M$ is irreducible, this implies that $M_\phi$ is also irreducible. Recall that a matrix is reducible if and only if it can be put into block upper triangular form by simultaneous row/column permutations (equivalent to relabeling the vertices of the associated graph).  Suppose we permute the rows/columns of the divisor matrix $M_\phi$ to form a block upper-triangular matrix. If the set of fixed points of $\phi$ form a block upper-triangular sub-matrix of $M_\phi$, then this ordering of rows/columns in the fixed points in the original matrix $M$ would still have a block upper-triangular form. So we assume that all fixed vertices are in the same block of $M_\phi$ when it is written as an upper-triangular matrix. This implies that $B_0$ can be permuted so that it is a block upper-triangular matrix.  Because $M$ is a non-negative matrix and $B_0=\sum M_i$, this implies that each $M_i$ is also block triangular. A matrix of block upper-triangular matrices can be permuted so that the result is a block upper-triangular matrix, thus $M$ must be reducible. Hence, if $M$ is irreducible, so is $M_{\phi}$.
+
+% Because $M_\phi$ is irreducible, we can apply the Perron-Frobenius Theorem to $M_\phi$. This implies that $\rho(M_\phi)$ is an eigenvalue of $M_\phi$, but from the first part of this theorem, we already showed that $\rho(M)=\rho(M_\phi)$, thus we conclude that $\rho(M)$ must be an eigenvalue of $M_\phi$.
+
+
+
 
 \section{Conclusion}
 \afcomm{We need a conclusion.}
